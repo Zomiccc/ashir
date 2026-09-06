@@ -2,83 +2,476 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   RED DEAD REDEMPTION 2 — DESIGN SYSTEM
+   "An American portfolio." — Ashir Qureshi
+   ============================================================ */
+
 @layer base {
   :root {
-    --background: #050508;
-    --surface: #0D0D14;
-    --border: #1A1A2E;
-    --accent: #6C63FF;
-    --accent-light: #A78BFA;
-    --text-primary: #F0F0FF;
-    --text-secondary: #8888AA;
+    /* --- Night / leather / ink --- */
+    --black: #070604;
+    --night: #0C0A07;
+    --leather: #16120C;
+    --leather-2: #1F1913;
+    --dust: #2C241A;
+    --smoke: #3A3025;
+
+    /* --- Paper / parchment --- */
+    --parchment: #E6D7B8;
+    --paper: #D8C5A0;
+    --paper-deep: #C2AC84;
+    --bone: #F4EBD8;
+
+    /* --- Metal / fire --- */
+    --gold: #D8B65E;
+    --gold-hi: #F0DFA8;
+    --brass: #A8873C;
+    --blood: #8E1B12;
+    --blood-hi: #C0392B;
+    --ember: #C1440E;
+    --sage: #6E7455;
+
+    /* --- Semantic --- */
+    --bg: var(--night);
+    --fg: var(--parchment);
+    --muted: #9A8B6F;
+    --line: rgba(216, 182, 94, 0.18);
+    --line-soft: rgba(216, 182, 94, 0.09);
+
+    --shadow-deep: 0 30px 80px -20px rgba(0, 0, 0, 0.9);
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  * {
+    border-color: var(--line-soft);
   }
 
   html {
     scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
   }
 
   body {
-    background-color: var(--background);
-    color: var(--text-primary);
-    font-family: var(--font-inter), sans-serif;
+    background-color: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body), Georgia, serif;
+    font-size: 17px;
+    line-height: 1.65;
     overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
   }
 
   ::selection {
-    background: rgba(108, 99, 255, 0.3);
-    color: #F0F0FF;
+    background: rgba(142, 27, 18, 0.55);
+    color: var(--bone);
+  }
+
+  ::-webkit-scrollbar {
+    width: 11px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--black);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--brass), var(--dust));
+    border: 2px solid var(--black);
+    border-radius: 99px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--gold);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display), Georgia, serif;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    line-height: 1.05;
   }
 }
 
+/* ============================================================
+   TYPOGRAPHY UTILITIES
+   ============================================================ */
 @layer utilities {
-  .glass {
-    background: rgba(13, 13, 20, 0.7);
-    border: 1px solid rgba(108, 99, 255, 0.2);
-    backdrop-filter: blur(16px);
-    box-shadow: 0 0 40px rgba(108, 99, 255, 0.05);
+  .font-outlaw {
+    font-family: var(--font-outlaw), Georgia, serif;
+  }
+  .font-display {
+    font-family: var(--font-display), Georgia, serif;
+  }
+  .font-body {
+    font-family: var(--font-body), Georgia, serif;
+  }
+  .font-type {
+    font-family: var(--font-type), "Courier New", monospace;
   }
 
-  .glass-hover:hover {
-    border-color: rgba(108, 99, 255, 0.4);
-    box-shadow: 0 0 40px rgba(108, 99, 255, 0.1);
+  .eyebrow {
+    font-family: var(--font-type), monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--brass);
   }
 
-  .text-gradient {
-    background: linear-gradient(135deg, #6C63FF, #A78BFA);
+  .gold-text {
+    background: linear-gradient(
+      176deg,
+      #fff4d2 0%,
+      #f0dfa8 26%,
+      #dcbc68 52%,
+      #e9cc86 76%,
+      #fff4d2 100%
+    );
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 10px rgba(216, 182, 94, 0.18));
+  }
+
+  .engrave {
+    text-shadow:
+      0 1px 0 rgba(0, 0, 0, 0.85),
+      0 -1px 0 rgba(255, 240, 200, 0.06);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
   }
 }
 
-/* Custom cursor styles */
-.custom-cursor {
+/* ============================================================
+   ATMOSPHERE — grain, vignette, paper
+   ============================================================ */
+@layer components {
+  .grain-layer {
+    position: fixed;
+    inset: -50%;
+    width: 200%;
+    height: 200%;
+    pointer-events: none;
+    z-index: 90;
+    opacity: 0.055;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation: grain-shift 0.6s steps(3) infinite;
+  }
+
+  @keyframes grain-shift {
+    0% {
+      transform: translate(0, 0);
+    }
+    33% {
+      transform: translate(-3%, 2%);
+    }
+    66% {
+      transform: translate(2%, -3%);
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+
+  .vignette {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 88;
+    background: radial-gradient(
+      130% 95% at 50% 42%,
+      transparent 38%,
+      rgba(6, 5, 3, 0.42) 74%,
+      rgba(4, 3, 2, 0.9) 100%
+    );
+  }
+
+  .warm-wash {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 87;
+    background: linear-gradient(
+      180deg,
+      rgba(193, 68, 14, 0.05),
+      transparent 30%,
+      transparent 70%,
+      rgba(12, 10, 7, 0.5)
+    );
+    mix-blend-mode: soft-light;
+  }
+
+  /* Aged paper surface — Wanted poster, journal, ledger */
+  .paper {
+    position: relative;
+    background:
+      radial-gradient(88% 68% at 22% 12%, rgba(255, 250, 235, 0.5), transparent 62%),
+      radial-gradient(70% 60% at 82% 88%, rgba(120, 88, 46, 0.28), transparent 66%),
+      linear-gradient(163deg, var(--parchment) 0%, var(--paper) 46%, var(--paper-deep) 100%);
+    color: #2a2015;
+    box-shadow:
+      inset 0 0 90px rgba(96, 64, 26, 0.4),
+      inset 0 0 14px rgba(60, 40, 16, 0.35),
+      var(--shadow-deep);
+  }
+
+  .paper::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.3;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04 0.9' numOctaves='5'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23p)' opacity='0.5'/%3E%3C/svg%3E");
+  }
+
+  .torn {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' preserveAspectRatio='none'%3E%3Cfilter id='t'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.02 0.06' numOctaves='4'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='5'/%3E%3C/filter%3E%3Crect x='1' y='1' width='98' height='98' fill='%23fff' filter='url(%23t)'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' preserveAspectRatio='none'%3E%3Cfilter id='t'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.02 0.06' numOctaves='4'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='5'/%3E%3C/filter%3E%3Crect x='1' y='1' width='98' height='98' fill='%23fff' filter='url(%23t)'/%3E%3C/svg%3E");
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+  }
+
+  /* Leather / card surfaces */
+  .leather {
+    background:
+      radial-gradient(120% 100% at 50% 0%, rgba(216, 182, 94, 0.05), transparent 60%),
+      linear-gradient(168deg, var(--leather-2), var(--leather) 55%, var(--black));
+    border: 1px solid var(--line-soft);
+    box-shadow:
+      inset 0 1px 0 rgba(240, 223, 168, 0.05),
+      0 20px 50px -24px rgba(0, 0, 0, 0.95);
+  }
+
+  .hairline {
+    border-top: 1px solid var(--line);
+  }
+
+  /* Ornate rule used under section titles */
+  .rule-ornate {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--brass);
+  }
+  .rule-ornate::before,
+  .rule-ornate::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--brass), transparent);
+  }
+
+  /* Gold framed corners */
+  .corners {
+    position: relative;
+  }
+  .corners::before,
+  .corners::after {
+    content: "";
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border: 1px solid var(--gold);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .corners::before {
+    top: 8px;
+    left: 8px;
+    border-right: 0;
+    border-bottom: 0;
+  }
+  .corners::after {
+    bottom: 8px;
+    right: 8px;
+    border-left: 0;
+    border-top: 0;
+  }
+}
+
+/* ============================================================
+   DEAD EYE MODE
+   ============================================================ */
+.dead-eye-active {
+  filter: saturate(0.12) contrast(1.42) sepia(0.62) hue-rotate(-22deg) brightness(0.66);
+  transition: filter 700ms var(--ease-out);
+}
+.dead-eye-off {
+  transition: filter 900ms var(--ease-out);
+}
+
+.deadeye-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 89;
   pointer-events: none;
+  background:
+    radial-gradient(
+      95% 72% at 50% 50%,
+      rgba(180, 40, 24, 0.05) 0%,
+      rgba(150, 26, 16, 0.34) 58%,
+      rgba(88, 10, 6, 0.72) 82%,
+      rgba(40, 4, 2, 0.92) 100%
+    );
+  animation: deadeye-pulse 2.4s var(--ease-in-out) infinite;
+}
+
+/* A slow scanline crawl, so the mode feels like it is doing something. */
+.deadeye-veil::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    180deg,
+    rgba(255, 90, 69, 0.05) 0 1px,
+    transparent 1px 4px
+  );
+  animation: deadeye-scan 5s linear infinite;
+}
+
+@keyframes deadeye-scan {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(4px);
+  }
+}
+
+/* The iris that snaps open when Dead Eye engages. */
+.deadeye-veil::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid rgba(255, 90, 69, 0.35);
+  animation: deadeye-iris 700ms var(--ease-out) both;
+}
+
+@keyframes deadeye-iris {
+  0% {
+    clip-path: circle(0% at 50% 50%);
+    opacity: 1;
+  }
+  100% {
+    clip-path: circle(90% at 50% 50%);
+    opacity: 0.35;
+  }
+}
+@keyframes deadeye-pulse {
+  0%,
+  100% {
+    opacity: 0.78;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ============================================================
+   CURSOR
+   ============================================================ */
+@media (hover: hover) and (pointer: fine) {
+  body,
+  a,
+  button {
+    cursor: none;
+  }
+}
+
+.reticle {
   position: fixed;
   top: 0;
   left: 0;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #6C63FF;
+  z-index: 95;
+  pointer-events: none;
   mix-blend-mode: difference;
-  z-index: 9999;
-  transition: width 0.2s, height 0.2s, background 0.2s;
-  transform: translate(-50%, -50%);
+  will-change: transform;
 }
 
-.custom-cursor.expanded {
-  width: 40px;
-  height: 40px;
-  background: rgba(108, 99, 255, 0.2);
-  border: 2px solid #6C63FF;
+/* ============================================================
+   ANIMATION HELPERS
+   ============================================================ */
+@keyframes ember-rise {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--dx, 20px), -140px, 0) scale(0.3);
+    opacity: 0;
+  }
 }
 
-/* Reduced motion */
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  42% {
+    opacity: 0.86;
+  }
+  46% {
+    opacity: 1;
+  }
+  62% {
+    opacity: 0.9;
+  }
+}
+
+.animate-flicker {
+  animation: flicker 4.5s ease-in-out infinite;
+}
+
+@keyframes stamp-in {
+  0% {
+    transform: scale(2.4) rotate(-18deg);
+    opacity: 0;
+    filter: blur(6px);
+  }
+  60% {
+    transform: scale(0.94) rotate(-11deg);
+    opacity: 1;
+    filter: blur(0);
+  }
+  100% {
+    transform: scale(1) rotate(-11deg);
+    opacity: 1;
+  }
+}
+.animate-stamp {
+  animation: stamp-in 700ms var(--ease-out) both;
+}
+
+/* Focus visibility for keyboard users */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    transition-duration: 0.001ms !important;
+  }
+  .grain-layer {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
   }
 }

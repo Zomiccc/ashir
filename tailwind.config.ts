@@ -11,31 +11,33 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "#050508",
-        surface: "#0D0D14",
-        border: "#1A1A2E",
-        accent: {
-          DEFAULT: "#6C63FF",
-          glow: "rgba(108, 99, 255, 0.15)",
-          light: "#A78BFA",
-        },
-        text: {
-          primary: "#F0F0FF",
-          secondary: "#8888AA",
-        },
+        black: "#070604",
+        night: "#0C0A07",
+        leather: { DEFAULT: "#16120C", light: "#1F1913" },
+        dust: "#2C241A",
+        parchment: "#E6D7B8",
+        paper: { DEFAULT: "#D8C5A0", deep: "#C2AC84" },
+        bone: "#F4EBD8",
+        gold: { DEFAULT: "#D8B65E", hi: "#F0DFA8" },
+        brass: "#A8873C",
+        blood: { DEFAULT: "#8E1B12", hi: "#C0392B" },
+        ember: "#C1440E",
+        sage: "#6E7455",
+        muted: "#9A8B6F",
       },
       fontFamily: {
-        display: ["var(--font-space-grotesk)", "sans-serif"],
-        body: ["var(--font-inter)", "sans-serif"],
-        mono: ["var(--font-jetbrains-mono)", "monospace"],
+        outlaw: ["var(--font-outlaw)", "Georgia", "serif"],
+        display: ["var(--font-display)", "Georgia", "serif"],
+        body: ["var(--font-body)", "Georgia", "serif"],
+        type: ["var(--font-type)", "Courier New", "monospace"],
       },
       borderRadius: {
-        lg: "0.75rem",
-        md: "0.5rem",
-        sm: "0.25rem",
+        lg: "0.25rem",
+        md: "0.125rem",
+        sm: "0.0625rem",
       },
-      animation: {
-        "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+      transitionTimingFunction: {
+        frontier: "cubic-bezier(0.16, 1, 0.3, 1)",
       },
     },
   },
