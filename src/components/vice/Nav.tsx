@@ -296,20 +296,20 @@ export function Nav() {
   );
 }
 
-/** Monogram — an A/Q lockup in the signature gradient. */
+/** Avatar in a gradient ring — a face reads faster than a monogram. */
 function Mark() {
   return (
     <span
-      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
+      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg p-[1.5px]"
       style={{ background: "var(--grad)" }}
-      aria-hidden
     >
-      <span
-        className="font-display text-[0.85rem] font-black leading-none"
-        style={{ color: "#0a0616" }}
-      >
-        AQ
-      </span>
+      <img
+        src={profile.photoSmall}
+        alt=""
+        width={96}
+        height={96}
+        className="h-full w-full rounded-[0.4rem] object-cover"
+      />
     </span>
   );
 }

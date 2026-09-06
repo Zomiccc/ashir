@@ -31,6 +31,27 @@ export function Footer() {
       </div>
 
       <Container className="relative z-10">
+        {/* Brand plate. Sits here rather than mid-page: by the footer the neon
+            narrative has closed, so his own blue-branded banner reads as a
+            sign-off instead of fighting the palette. */}
+        <motion.div
+          className="mb-20 overflow-hidden rounded-2xl p-[1.5px]"
+          style={{ background: "var(--grad)" }}
+          initial={{ opacity: 0, y: 26 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-8%" }}
+          transition={{ duration: 0.9, ease: EASE }}
+        >
+          <img
+            src={profile.banner}
+            alt={`${profile.name} — ${profile.tagline} Bridging AI and code, end-to-end solutions.`}
+            width={1584}
+            height={396}
+            loading="lazy"
+            className="block w-full rounded-2xl"
+          />
+        </motion.div>
+
         <motion.div
           className="pb-20 text-center"
           initial={{ opacity: 0, y: 22 }}

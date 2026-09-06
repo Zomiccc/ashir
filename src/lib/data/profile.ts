@@ -19,6 +19,11 @@ export const profile = {
   cv: "/Ashir_Qureshi_Resume.pdf",
   cvDocx: "/Ashir_Qureshi_Resume.docx",
   openTo: "Backend & full-stack engineering roles",
+  /** His own line, lifted from the LinkedIn banner. */
+  tagline: "One engineer. Every layer.",
+  photo: "/img/ashir.jpg",
+  photoSmall: "/img/ashir-96.jpg",
+  banner: "/img/banner.jpg",
   links: {
     github: "https://github.com/Zomiccc",
     linkedin: "https://www.linkedin.com/in/ashirqureshiaq/",

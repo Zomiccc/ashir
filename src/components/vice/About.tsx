@@ -174,16 +174,19 @@ function IdCard() {
 
         <div className="relative" style={{ transform: "translateZ(30px)" }}>
           <div className="flex items-start justify-between gap-4">
+            {/* Gradient ring around the portrait, so the blue studio
+                backdrop reads as intentional against the neon palette. */}
             <span
-              className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl"
+              className="flex h-[7.5rem] w-[7.5rem] shrink-0 items-center justify-center rounded-2xl p-[2px]"
               style={{ background: "var(--grad)" }}
             >
-              <span
-                className="font-display text-xl font-black"
-                style={{ color: "#0a0616" }}
-              >
-                AQ
-              </span>
+              <img
+                src={profile.photo}
+                alt={`${profile.name}, software engineer`}
+                width={400}
+                height={400}
+                className="h-full w-full rounded-2xl object-cover"
+              />
             </span>
             <span
               className="font-mono rounded-full border px-3 py-1.5 text-[0.55rem] tracking-[0.14em]"
@@ -201,6 +204,9 @@ function IdCard() {
           </h3>
           <p className="font-mono mt-1 text-[0.65rem] tracking-[0.14em]" style={{ color: "var(--cool)" }}>
             @{profile.alias}
+          </p>
+          <p className="mt-3 text-[0.95rem] italic" style={{ color: "var(--fg-dim)" }}>
+            &ldquo;{profile.tagline}&rdquo;
           </p>
 
           <dl className="mt-7 space-y-3.5">
