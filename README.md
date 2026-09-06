@@ -1,34 +1,35 @@
 # Ashir Qureshi — Portfolio
 
-A Red Dead Redemption 2–inspired personal site. Dusk over the frontier, a wanted
-poster, a weapon wheel, a bounty board, and a trail map — built as a real portfolio,
-not a theme demo.
+A GTA VI / Vice City–inspired personal site: neon on night, Florida sunset, a
+perspective grid horizon — built as a working portfolio rather than a theme demo.
+Loud where it earns it, quiet everywhere the content has to be read.
 
 **Live:** [ashir-qureshi.vercel.app](https://ashir-qureshi.vercel.app)
 
 ---
 
-## What's in it
+## Sections
 
-| Section | What it is |
+| Section | What's in it |
 |---|---|
-| **Camp** | Cinematic parallax hero — layered SVG ridges, a lone rider, drifting dust, a sun setting behind the mesas |
-| **Wanted** | The About section as an aged wanted poster with a 3D pointer tilt, wax seal, and RDR2-style core meters |
-| **Arsenal** | An interactive weapon wheel — six wedges, one per discipline, hover or tab to open the satchel |
-| **Bounties** | Every project as a bounty notice, filterable by tier, each opening a full briefing on parchment |
-| **The Trail** | Career history plotted as waypoints on a hand-drawn parchment map |
-| **Ledger** | Services, certifications, and live GitHub language stats pulled from the API |
-| **Telegram** | A Western Union telegram form that composes a real email |
+| **Home** | Parallax dusk hero — banded sun on the horizon, city skyline, palms, perspective grid floor, and a marquee of the stack |
+| **About** | An ID-card profile with pointer tilt, depth meters, and a counted stat row |
+| **Work** | 17 projects, six of them flagship, filterable by tier — each opens a full case-study panel |
+| **Skills** | A radial six-segment selector; the centre shows the lead tool for the active area |
+| **Experience** | Six roles on an interactive spine, plus education and the YMF × Bilt hackathon |
+| **Services** | What I take on, alongside live GitHub language stats and certifications |
+| **Contact** | A message form that composes a real email, plus every direct channel |
 
 ### Signature interactions
 
-- **Dead Eye mode** — press `E` (or hit the HUD button). The page drains to crimson,
-  a scanline crawls, and the meter drains and refills exactly like the game.
-- **Honor meter** — the fixed HUD bar fills as you ride down the page, and steps
-  aside when the footer arrives.
-- **Aiming reticle** — replaces the pointer on fine-pointer devices, snapping wider
-  and turning red over anything actionable.
-- **Boot sequence** — name burn-in, chapter card, then the curtain lifts.
+- **Radio (colour grades)** — three stations in the top bar swap the whole palette:
+  `98.3 Vice` (magenta/cyan), `104.7 Sunset` (orange/gold), `88.1 Midnight`
+  (violet/cyan). Press `R` to cycle. The choice persists per visitor.
+- **Neon cursor** — a leading dot with a trailing ring that opens over anything
+  actionable, on fine-pointer devices only.
+- **Scroll HUD** — a section label and progress bar that steps aside at the footer.
+- **Intro** — the name resolves out of a gradient wash, then the panel splits. Under
+  two and a half seconds; nobody should wait to read a CV.
 
 ---
 
@@ -36,12 +37,12 @@ not a theme demo.
 
 - **Next.js 16** (App Router, static export)
 - **React 19** · **TypeScript**
-- **Tailwind CSS** for layout, hand-written CSS for the design system
+- **Tailwind CSS** for layout, hand-written CSS custom properties for the palette
 - **Framer Motion** for every transition
-- Canvas particles and inline SVG for the landscape — no image assets, no 3D library
+- Canvas particles and inline SVG for the hero — no image assets, no 3D library
 
-Type is `Rye` (outlaw display), `Cinzel` (headings), `EB Garamond` (body), and
-`Special Elite` (typewriter UI), all self-hosted via `next/font`.
+Type is `Archivo` (display), `Inter` (body), and `JetBrains Mono` (labels), all
+self-hosted through `next/font`.
 
 ---
 
@@ -67,22 +68,22 @@ src/
 ├── app/
 │   ├── layout.tsx            # fonts, metadata, JSON-LD
 │   ├── page.tsx              # section composition
-│   ├── globals.css           # the RDR2 design system
+│   ├── globals.css           # palette, grades, surfaces
 │   └── opengraph-image.tsx   # generated share card
-├── components/rdr/           # every section and effect
-└── lib/data/                 # profile, bounties, trail, arsenal
+├── components/vice/          # every section and effect
+└── lib/data/                 # profile, projects, experience, skills
 ```
 
-All content lives in `src/lib/data/` — editing a project or a job means touching one
+All content lives in `src/lib/data/` — adding a project or a role means editing one
 data file, never a component.
 
 ---
 
 ## Accessibility
 
-Respects `prefers-reduced-motion` (animations collapse, canvas draws one static
-frame), keeps a visible focus ring, keeps the weapon wheel keyboard-navigable, and
-falls back to the native pointer on touch devices.
+Respects `prefers-reduced-motion` (transitions collapse, canvas draws a single
+static frame), keeps a visible focus ring, keeps the skills wheel and radio tuner
+keyboard-operable, and falls back to the native pointer on touch devices.
 
 ---
 

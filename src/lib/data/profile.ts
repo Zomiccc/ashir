@@ -4,20 +4,21 @@ export const profile = {
   lastName: "Qureshi",
   alias: "Zomiccc",
   role: "Software Engineer",
+  title: "Software Engineer — Backend & AI-Integrated Systems",
   roles: [
-    "Full-Stack Engineer",
-    "Backend & Systems",
-    "Computer Vision / ML",
-    "Freelance Builder",
+    "Backend Engineer",
+    "Full-Stack Developer",
+    "AI & Computer Vision",
+    "Systems Integration",
   ],
-  tagline: "Building Systems That Scale",
   location: "Islamabad, Pakistan",
   timezone: "UTC +05:00",
   email: "ashir.qureshi.aqq@gmail.com",
   phone: "+92 325 9105688",
   phoneHref: "+923259105688",
-  cv: "/Ashir_Qureshi_CV.pdf",
-  cvDocx: "/Ashir_Qureshi_CV.docx",
+  cv: "/Ashir_Qureshi_Resume.pdf",
+  cvDocx: "/Ashir_Qureshi_Resume.docx",
+  openTo: "Backend & full-stack engineering roles",
   links: {
     github: "https://github.com/Zomiccc",
     linkedin: "https://www.linkedin.com/in/ashirqureshiaq/",
@@ -25,21 +26,41 @@ export const profile = {
     email: "mailto:ashir.qureshi.aqq@gmail.com",
   },
   summary:
-    "Results-driven software engineer with hands-on experience across full-stack development, backend systems, and machine learning. I design and ship scalable REST APIs, real-time applications, and computer-vision pipelines in production startup environments — from YOLOv8 inference pipelines to Redis-backed Node services and responsive React front-ends.",
+    "Backend and full-stack software engineer with production experience designing REST APIs, event-driven architectures, and third-party system integrations — Stripe, WhatsApp, Twilio, WooCommerce, Shopify — using Node.js, NestJS, TypeScript, and PostgreSQL.",
+  summaryLong:
+    "I build the parts of a product that have to be right: the API surface, the data model, the payment and messaging integrations, and the webhook flows that keep everything in sync when a dozen systems are talking at once. Alongside that I have shipped a computer-vision pipeline end to end — fine-tuning YOLOv8, running real-time inference, and wiring OCR into the same pass. The common thread is orchestrating services that were never designed to talk to each other, and making the result hold up in production.",
   short:
-    "CS undergrad building full-stack products, backend services, and ML systems. Three years shipping for startups.",
+    "Backend and full-stack engineer. REST APIs, event-driven systems, payment and messaging integrations, and computer vision.",
 } as const;
 
 export const stats = [
-  { label: "Years Riding", value: 3, suffix: "+", note: "Startup delivery since 2023" },
-  { label: "Repositories", value: 25, suffix: "", note: "Public work on GitHub" },
-  { label: "Projects Shipped", value: 22, suffix: "+", note: "Live, deployed, or delivered" },
-  { label: "Companies Served", value: 3, suffix: "", note: "Web Deed · Grand Productum · FMKC" },
+  { label: "Years Building", value: 3, suffix: "+", note: "Shipping since 2023" },
+  { label: "Live Products", value: 4, suffix: "", note: "In production today" },
+  { label: "Repositories", value: 25, suffix: "", note: "Public on GitHub" },
+  { label: "Integrations", value: 10, suffix: "+", note: "Payments, messaging, data" },
 ] as const;
 
-/** RDR2 "core" meters — playful but honest self-assessment. */
-export const cores = [
-  { name: "Backend", value: 92, icon: "health" },
-  { name: "Frontend", value: 86, icon: "stamina" },
-  { name: "ML / Vision", value: 78, icon: "deadeye" },
+/** Self-assessed depth by discipline — drives the radial meters in the profile block. */
+export const meters = [
+  { name: "Backend & APIs", value: 92 },
+  { name: "Full-Stack", value: 86 },
+  { name: "AI / Vision", value: 78 },
+] as const;
+
+/** Short, checkable credibility markers shown under the hero. */
+export const marquee = [
+  "Node.js",
+  "NestJS",
+  "TypeScript",
+  "PostgreSQL",
+  "Redis",
+  "Next.js",
+  "React Native",
+  "Prisma",
+  "Stripe",
+  "WhatsApp API",
+  "YOLOv8",
+  "OpenCV",
+  "Docker",
+  "Supabase",
 ] as const;

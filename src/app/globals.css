@@ -3,49 +3,76 @@
 @tailwind utilities;
 
 /* ============================================================
-   RED DEAD REDEMPTION 2 — DESIGN SYSTEM
-   "An American portfolio." — Ashir Qureshi
+   VICE — design system
+   Neon-on-night, Florida-sunset palette. Loud where it earns it,
+   quiet everywhere the content has to be read.
    ============================================================ */
 
 @layer base {
   :root {
-    /* --- Night / leather / ink --- */
-    --black: #070604;
-    --night: #0C0A07;
-    --leather: #16120C;
-    --leather-2: #1F1913;
-    --dust: #2C241A;
-    --smoke: #3A3025;
+    /* --- Ground --- */
+    --void: #06030d;
+    --night: #0a0616;
+    --deep: #100a22;
+    --raised: #171030;
+    --line: rgba(255, 255, 255, 0.08);
+    --line-hot: rgba(255, 46, 136, 0.28);
 
-    /* --- Paper / parchment --- */
-    --parchment: #E6D7B8;
-    --paper: #D8C5A0;
-    --paper-deep: #C2AC84;
-    --bone: #F4EBD8;
+    /* --- Type --- */
+    --fg: #f4f0ff;
+    --fg-dim: #b6acd6;
+    --fg-mute: #8578a8;
 
-    /* --- Metal / fire --- */
-    --gold: #D8B65E;
-    --gold-hi: #F0DFA8;
-    --brass: #A8873C;
-    --blood: #8E1B12;
-    --blood-hi: #C0392B;
-    --ember: #C1440E;
-    --sage: #6E7455;
+    /* --- Accents (overridden per radio grade) --- */
+    --hot: #ff2e88;
+    --hot-soft: #ff6eb4;
+    --cool: #22d3ee;
+    --cool-soft: #7ce8f8;
+    --warm: #ff9b3d;
+    --violet: #a855f7;
 
-    /* --- Semantic --- */
-    --bg: var(--night);
-    --fg: var(--parchment);
-    --muted: #9A8B6F;
-    --line: rgba(216, 182, 94, 0.18);
-    --line-soft: rgba(216, 182, 94, 0.09);
+    /* --- Signature gradient --- */
+    --grad: linear-gradient(103deg, #ff2e88 0%, #ff5c9d 28%, #ff9b3d 68%, #ffd166 100%);
+    --grad-cool: linear-gradient(103deg, #22d3ee 0%, #7c5cff 60%, #ff2e88 100%);
 
-    --shadow-deep: 0 30px 80px -20px rgba(0, 0, 0, 0.9);
-    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    --shadow-lift: 0 24px 60px -28px rgba(0, 0, 0, 0.95);
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* ---- Radio grade: SUNSET ---- */
+  [data-grade="sunset"] {
+    --hot: #ff7a2f;
+    --hot-soft: #ffab5e;
+    --cool: #ffd166;
+    --cool-soft: #ffe7a8;
+    --warm: #ff4d6d;
+    --violet: #ff8fab;
+    --deep: #150c18;
+    --raised: #1f1224;
+    --line-hot: rgba(255, 122, 47, 0.3);
+    --grad: linear-gradient(103deg, #ff4d6d 0%, #ff7a2f 42%, #ffab5e 72%, #ffd166 100%);
+    --grad-cool: linear-gradient(103deg, #ffd166 0%, #ff7a2f 55%, #ff4d6d 100%);
+  }
+
+  /* ---- Radio grade: MIDNIGHT ---- */
+  [data-grade="midnight"] {
+    --hot: #7c5cff;
+    --hot-soft: #a48dff;
+    --cool: #22d3ee;
+    --cool-soft: #9beef8;
+    --warm: #4ade80;
+    --violet: #22d3ee;
+    --void: #03040c;
+    --night: #060911;
+    --deep: #0a0f1e;
+    --raised: #101728;
+    --line-hot: rgba(124, 92, 255, 0.3);
+    --grad: linear-gradient(103deg, #22d3ee 0%, #7c5cff 55%, #a48dff 100%);
+    --grad-cool: linear-gradient(103deg, #4ade80 0%, #22d3ee 50%, #7c5cff 100%);
   }
 
   * {
-    border-color: var(--line-soft);
+    border-color: var(--line);
   }
 
   html {
@@ -54,85 +81,84 @@
   }
 
   body {
-    background-color: var(--bg);
+    background-color: var(--night);
     color: var(--fg);
-    font-family: var(--font-body), Georgia, serif;
-    font-size: 17px;
-    line-height: 1.65;
+    font-family: var(--font-body), system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
     overflow-x: hidden;
-    text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+    transition:
+      background-color 600ms var(--ease),
+      color 600ms var(--ease);
   }
 
   ::selection {
-    background: rgba(142, 27, 18, 0.55);
-    color: var(--bone);
+    background: var(--hot);
+    color: #fff;
   }
 
   ::-webkit-scrollbar {
-    width: 11px;
+    width: 10px;
   }
   ::-webkit-scrollbar-track {
-    background: var(--black);
+    background: var(--void);
   }
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, var(--brass), var(--dust));
-    border: 2px solid var(--black);
+    background: var(--grad);
+    border: 2px solid var(--void);
     border-radius: 99px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--gold);
   }
 
   h1,
   h2,
   h3,
   h4 {
-    font-family: var(--font-display), Georgia, serif;
-    font-weight: 700;
-    letter-spacing: 0.01em;
-    line-height: 1.05;
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.02;
   }
 }
 
 /* ============================================================
-   TYPOGRAPHY UTILITIES
+   TYPE
    ============================================================ */
 @layer utilities {
-  .font-outlaw {
-    font-family: var(--font-outlaw), Georgia, serif;
-  }
   .font-display {
-    font-family: var(--font-display), Georgia, serif;
+    font-family: var(--font-display), system-ui, sans-serif;
   }
   .font-body {
-    font-family: var(--font-body), Georgia, serif;
+    font-family: var(--font-body), system-ui, sans-serif;
   }
-  .font-type {
-    font-family: var(--font-type), "Courier New", monospace;
+  .font-mono {
+    font-family: var(--font-mono), ui-monospace, monospace;
   }
 
   .eyebrow {
-    font-family: var(--font-type), monospace;
+    font-family: var(--font-mono), monospace;
     font-size: 0.68rem;
-    letter-spacing: 0.42em;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
-    color: var(--brass);
+    color: var(--hot);
   }
 
-  .gold-text {
-    background: linear-gradient(
-      176deg,
-      #fff4d2 0%,
-      #f0dfa8 26%,
-      #dcbc68 52%,
-      #e9cc86 76%,
-      #fff4d2 100%
-    );
+  .neon-text {
+    background: var(--grad);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 2px 10px rgba(216, 182, 94, 0.18));
+  }
+
+  .cool-text {
+    background: var(--grad-cool);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .glow-hot {
+    filter: drop-shadow(0 0 22px color-mix(in srgb, var(--hot) 45%, transparent));
   }
 
   .text-balance {
@@ -144,226 +170,147 @@
 }
 
 /* ============================================================
-   ATMOSPHERE — grain, vignette, paper
+   SURFACES
    ============================================================ */
 @layer components {
-  .grain-layer {
-    position: fixed;
-    inset: -50%;
-    width: 200%;
-    height: 200%;
-    pointer-events: none;
-    z-index: 90;
-    opacity: 0.055;
-    mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
-    animation: grain-shift 0.6s steps(3) infinite;
-  }
-
-  @keyframes grain-shift {
-    0% {
-      transform: translate(0, 0);
-    }
-    33% {
-      transform: translate(-3%, 2%);
-    }
-    66% {
-      transform: translate(2%, -3%);
-    }
-    100% {
-      transform: translate(0, 0);
-    }
-  }
-
-  .vignette {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 88;
-    background: radial-gradient(
-      130% 95% at 50% 42%,
-      transparent 38%,
-      rgba(6, 5, 3, 0.42) 74%,
-      rgba(4, 3, 2, 0.9) 100%
-    );
-  }
-
-  .warm-wash {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 87;
+  .glass {
     background: linear-gradient(
-      180deg,
-      rgba(193, 68, 14, 0.05),
-      transparent 30%,
-      transparent 70%,
-      rgba(12, 10, 7, 0.5)
+      160deg,
+      color-mix(in srgb, var(--raised) 92%, transparent),
+      color-mix(in srgb, var(--deep) 96%, transparent)
     );
-    mix-blend-mode: soft-light;
+    border: 1px solid var(--line);
+    backdrop-filter: blur(14px);
+    box-shadow: var(--shadow-lift);
   }
 
-  /* Aged paper surface — Wanted poster, journal, ledger */
-  .paper {
+  /* Gradient hairline border that lights on hover */
+  .edge-lit {
     position: relative;
-    background:
-      radial-gradient(88% 68% at 22% 12%, rgba(255, 250, 235, 0.5), transparent 62%),
-      radial-gradient(70% 60% at 82% 88%, rgba(120, 88, 46, 0.28), transparent 66%),
-      linear-gradient(163deg, var(--parchment) 0%, var(--paper) 46%, var(--paper-deep) 100%);
-    color: #2a2015;
-    box-shadow:
-      inset 0 0 90px rgba(96, 64, 26, 0.4),
-      inset 0 0 14px rgba(60, 40, 16, 0.35),
-      var(--shadow-deep);
+    isolation: isolate;
   }
-
-  .paper::after {
+  .edge-lit::before {
     content: "";
     position: absolute;
     inset: 0;
+    padding: 1px;
+    background: var(--grad);
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 420ms var(--ease);
     pointer-events: none;
-    opacity: 0.3;
-    mix-blend-mode: multiply;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04 0.9' numOctaves='5'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23p)' opacity='0.5'/%3E%3C/svg%3E");
+    z-index: 1;
+  }
+  .edge-lit:hover::before,
+  .edge-lit:focus-within::before {
+    opacity: 1;
   }
 
-  .torn {
-    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' preserveAspectRatio='none'%3E%3Cfilter id='t'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.02 0.06' numOctaves='4'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='5'/%3E%3C/filter%3E%3Crect x='1' y='1' width='98' height='98' fill='%23fff' filter='url(%23t)'/%3E%3C/svg%3E");
-    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' preserveAspectRatio='none'%3E%3Cfilter id='t'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.02 0.06' numOctaves='4'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='5'/%3E%3C/filter%3E%3Crect x='1' y='1' width='98' height='98' fill='%23fff' filter='url(%23t)'/%3E%3C/svg%3E");
-    -webkit-mask-size: 100% 100%;
-    mask-size: 100% 100%;
-  }
-
-  /* Leather / card surfaces */
-  .leather {
-    background:
-      radial-gradient(120% 100% at 50% 0%, rgba(216, 182, 94, 0.05), transparent 60%),
-      linear-gradient(168deg, var(--leather-2), var(--leather) 55%, var(--black));
-    border: 1px solid var(--line-soft);
-    box-shadow:
-      inset 0 1px 0 rgba(240, 223, 168, 0.05),
-      0 20px 50px -24px rgba(0, 0, 0, 0.95);
-  }
-
-  /* Ornate rule used under section titles */
-  .rule-ornate {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    color: var(--brass);
-  }
-  .rule-ornate::before,
-  .rule-ornate::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--brass), transparent);
-  }
-
-  /* Gold framed corners */
-  .corners {
-    position: relative;
-  }
-  .corners::before,
-  .corners::after {
-    content: "";
-    position: absolute;
-    width: 22px;
-    height: 22px;
-    border: 1px solid var(--gold);
+  /* Always-on gradient border, for the flagship cards */
+  .edge-always::before {
     opacity: 0.5;
-    pointer-events: none;
   }
-  .corners::before {
-    top: 8px;
-    left: 8px;
-    border-right: 0;
-    border-bottom: 0;
+  .edge-always:hover::before {
+    opacity: 1;
   }
-  .corners::after {
-    bottom: 8px;
-    right: 8px;
-    border-left: 0;
-    border-top: 0;
+
+  /* Perspective grid floor — the Vice City horizon */
+  .grid-floor {
+    background-image:
+      linear-gradient(color-mix(in srgb, var(--cool) 62%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--hot) 52%, transparent) 1px, transparent 1px);
+    background-size: 100% 40px, 40px 100%;
+    -webkit-mask-image: linear-gradient(180deg, transparent 30%, #000 62%, #000 88%, transparent 100%);
+    mask-image: linear-gradient(180deg, transparent 30%, #000 62%, #000 88%, transparent 100%);
+  }
+
+  /* Horizontal bands across the sun disc */
+  .sun-bands {
+    background-image: repeating-linear-gradient(
+      180deg,
+      transparent 0 12px,
+      rgba(6, 3, 13, 0.62) 12px 18px
+    );
+  }
+
+  .chip {
+    font-family: var(--font-mono), monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    padding: 0.4rem 0.7rem;
+    border: 1px solid var(--line);
+    color: var(--fg-dim);
+    background: color-mix(in srgb, var(--raised) 60%, transparent);
+    border-radius: 3px;
+    transition:
+      border-color 280ms var(--ease),
+      color 280ms var(--ease);
+  }
+  .chip:hover {
+    border-color: var(--line-hot);
+    color: var(--fg);
   }
 }
 
 /* ============================================================
-   DEAD EYE MODE
+   ATMOSPHERE
    ============================================================ */
-.dead-eye-active {
-  filter: saturate(0.12) contrast(1.42) sepia(0.62) hue-rotate(-22deg) brightness(0.66);
-  transition: filter 700ms var(--ease-out);
-}
-.dead-eye-off {
-  transition: filter 900ms var(--ease-out);
+.grain {
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 90;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain-shift 0.7s steps(3) infinite;
 }
 
-.deadeye-veil {
+@keyframes grain-shift {
+  0% {
+    transform: translate(0, 0);
+  }
+  33% {
+    transform: translate(-2%, 2%);
+  }
+  66% {
+    transform: translate(2%, -2%);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.scanlines {
   position: fixed;
   inset: 0;
-  z-index: 89;
   pointer-events: none;
-  background:
-    radial-gradient(
-      95% 72% at 50% 50%,
-      rgba(180, 40, 24, 0.05) 0%,
-      rgba(150, 26, 16, 0.34) 58%,
-      rgba(88, 10, 6, 0.72) 82%,
-      rgba(40, 4, 2, 0.92) 100%
-    );
-  animation: deadeye-pulse 2.4s var(--ease-in-out) infinite;
-}
-
-/* A slow scanline crawl, so the mode feels like it is doing something. */
-.deadeye-veil::before {
-  content: "";
-  position: absolute;
-  inset: 0;
+  z-index: 89;
+  opacity: 0.3;
   background-image: repeating-linear-gradient(
     180deg,
-    rgba(255, 90, 69, 0.05) 0 1px,
-    transparent 1px 4px
+    rgba(255, 255, 255, 0.022) 0 1px,
+    transparent 1px 3px
   );
-  animation: deadeye-scan 5s linear infinite;
 }
 
-@keyframes deadeye-scan {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(4px);
-  }
-}
-
-/* The iris that snaps open when Dead Eye engages. */
-.deadeye-veil::after {
-  content: "";
-  position: absolute;
+.vignette {
+  position: fixed;
   inset: 0;
-  border: 2px solid rgba(255, 90, 69, 0.35);
-  animation: deadeye-iris 700ms var(--ease-out) both;
-}
-
-@keyframes deadeye-iris {
-  0% {
-    clip-path: circle(0% at 50% 50%);
-    opacity: 1;
-  }
-  100% {
-    clip-path: circle(90% at 50% 50%);
-    opacity: 0.35;
-  }
-}
-@keyframes deadeye-pulse {
-  0%,
-  100% {
-    opacity: 0.78;
-  }
-  50% {
-    opacity: 1;
-  }
+  pointer-events: none;
+  z-index: 88;
+  background: radial-gradient(
+    128% 92% at 50% 46%,
+    transparent 40%,
+    rgba(4, 2, 10, 0.44) 76%,
+    rgba(3, 1, 8, 0.88) 100%
+  );
 }
 
 /* ============================================================
@@ -377,77 +324,54 @@
   }
 }
 
-.reticle {
+.cursor-layer {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 95;
   pointer-events: none;
-  mix-blend-mode: difference;
   will-change: transform;
 }
 
 /* ============================================================
-   ANIMATION HELPERS
+   MOTION
    ============================================================ */
-@keyframes ember-rise {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  100% {
-    transform: translate3d(var(--dx, 20px), -140px, 0) scale(0.3);
-    opacity: 0;
-  }
-}
-
-@keyframes flicker {
+@keyframes pulse-soft {
   0%,
   100% {
     opacity: 1;
   }
-  42% {
-    opacity: 0.86;
+  50% {
+    opacity: 0.45;
   }
-  46% {
-    opacity: 1;
+}
+.animate-pulse-soft {
+  animation: pulse-soft 2.4s ease-in-out infinite;
+}
+
+@keyframes marquee-run {
+  from {
+    transform: translateX(0);
   }
-  62% {
-    opacity: 0.9;
+  to {
+    transform: translateX(-50%);
   }
 }
 
-.animate-flicker {
-  animation: flicker 4.5s ease-in-out infinite;
-}
-
-@keyframes stamp-in {
-  0% {
-    transform: scale(2.4) rotate(-18deg);
-    opacity: 0;
-    filter: blur(6px);
-  }
-  60% {
-    transform: scale(0.94) rotate(-11deg);
-    opacity: 1;
-    filter: blur(0);
-  }
+@keyframes float-slow {
+  0%,
   100% {
-    transform: scale(1) rotate(-11deg);
-    opacity: 1;
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
   }
 }
-.animate-stamp {
-  animation: stamp-in 700ms var(--ease-out) both;
-}
 
-/* Focus visibility for keyboard users */
 :focus-visible {
-  outline: 2px solid var(--gold);
+  outline: 2px solid var(--cool);
   outline-offset: 3px;
+  border-radius: 2px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -458,7 +382,7 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
-  .grain-layer {
+  .grain {
     animation: none;
   }
   html {

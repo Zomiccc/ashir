@@ -1,31 +1,22 @@
 import type { Metadata, Viewport } from "next";
-import { Rye, Cinzel, EB_Garamond, Special_Elite } from "next/font/google";
+import { Archivo, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const rye = Rye({
+const archivo = Archivo({
   subsets: ["latin"],
-  weight: "400",
-  variable: "--font-outlaw",
-  display: "swap",
-});
-
-const cinzel = Cinzel({
-  subsets: ["latin"],
-  weight: ["400", "600", "700", "900"],
   variable: "--font-display",
   display: "swap",
 });
 
-const garamond = EB_Garamond({
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
 });
 
-const specialElite = Special_Elite({
+const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
-  weight: "400",
-  variable: "--font-type",
+  variable: "--font-mono",
   display: "swap",
 });
 
@@ -38,27 +29,29 @@ export const metadata: Metadata = {
     template: "%s · Ashir Qureshi",
   },
   description:
-    "Software engineer building full-stack products, backend services, and computer-vision systems. Node.js, PostgreSQL, Next.js, YOLOv8. Three years shipping for startups.",
+    "Backend and full-stack software engineer. REST APIs, event-driven architectures, and third-party integrations with Node.js, NestJS, TypeScript and PostgreSQL — plus computer-vision pipelines in YOLOv8 and OpenCV.",
   keywords: [
     "Ashir Qureshi",
     "Software Engineer",
-    "Full Stack Developer",
     "Backend Engineer",
+    "Full Stack Developer",
+    "Node.js",
+    "NestJS",
+    "TypeScript",
+    "PostgreSQL",
     "Computer Vision",
     "YOLOv8",
-    "Next.js",
-    "Node.js",
-    "PostgreSQL",
-    "Pakistan Developer",
+    "Stripe Integration",
+    "WhatsApp API",
     "Islamabad",
-    "Zomiccc",
+    "Pakistan",
   ],
   authors: [{ name: "Ashir Qureshi", url: "https://github.com/Zomiccc" }],
   creator: "Ashir Qureshi",
   openGraph: {
     title: "Ashir Qureshi — Software Engineer",
     description:
-      "Full-stack products, backend services, and computer-vision systems. Three years shipping for startups.",
+      "Backend & full-stack engineer. APIs, event-driven systems, payment and messaging integrations, and computer vision.",
     type: "website",
     locale: "en_US",
     url: SITE,
@@ -68,13 +61,13 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Ashir Qureshi — Software Engineer",
     description:
-      "Full-stack products, backend services, and computer-vision systems.",
+      "Backend & full-stack engineer. APIs, event-driven systems, and computer vision.",
   },
   robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0C0A07",
+  themeColor: "#0A0616",
   colorScheme: "dark",
 };
 
@@ -85,23 +78,25 @@ const personSchema = {
   jobTitle: "Software Engineer",
   url: SITE,
   email: "ashir.qureshi.aqq@gmail.com",
-  sameAs: [
-    "https://github.com/Zomiccc",
-    "https://www.linkedin.com/in/ashirqureshiaq/",
-  ],
-  address: { "@type": "PostalAddress", addressLocality: "Islamabad", addressCountry: "PK" },
+  sameAs: ["https://github.com/Zomiccc", "https://www.linkedin.com/in/ashirqureshiaq/"],
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Islamabad",
+    addressCountry: "PK",
+  },
   alumniOf: {
     "@type": "CollegeOrUniversity",
     name: "Capital University of Science and Technology",
   },
   knowsAbout: [
-    "Full-Stack Development",
     "Backend Engineering",
-    "Computer Vision",
-    "Machine Learning",
+    "REST API Design",
+    "Event-Driven Architecture",
     "Node.js",
+    "NestJS",
     "PostgreSQL",
-    "Next.js",
+    "Computer Vision",
+    "Payment Integration",
   ],
 };
 
@@ -111,7 +106,8 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${rye.variable} ${cinzel.variable} ${garamond.variable} ${specialElite.variable}`}
+      data-grade="vice"
+      className={`${archivo.variable} ${inter.variable} ${jetbrains.variable}`}
     >
       <body className="antialiased">
         <script
