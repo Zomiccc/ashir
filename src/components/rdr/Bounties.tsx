@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Section, Container, SectionHeading } from "./Section";
 import { Reveal } from "./Reveal";
-import { bounties, type Bounty, type Tier } from "@/lib/data/bounties";
+import { bounties, tierMeta, type Bounty, type Tier } from "@/lib/data/bounties";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -91,6 +91,23 @@ export function Bounties() {
             </div>
           </div>
         </Reveal>
+
+        {/* Tier note — only when the board is narrowed to one kind of job */}
+        <AnimatePresence mode="wait">
+          {filter !== "all" && (
+            <motion.p
+              key={filter}
+              className="font-body -mt-6 mb-10 max-w-xl text-[0.95rem] italic"
+              style={{ color: "var(--muted)" }}
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.35, ease: EASE }}
+            >
+              {tierMeta[filter].label} — {tierMeta[filter].blurb}
+            </motion.p>
+          )}
+        </AnimatePresence>
 
         {/* Board */}
         <motion.ul layout className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -354,7 +371,7 @@ function BountyModal({ bounty: b, onClose }: { bounty: Bounty | null; onClose: (
         >
           <div
             className="fixed inset-0"
-            style={{ background: "rgba(5,4,3,0.9)", backdropFilter: "blur(10px)" }}
+            style={{ background: "rgba(5,4,3,0.94)", backdropFilter: "blur(14px)" }}
             onClick={onClose}
             aria-hidden
           />
